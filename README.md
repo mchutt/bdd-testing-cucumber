@@ -1,3 +1,6 @@
+java -jar selenium-server-4.27.0.jar standalone
+
+
 ### Getting started
 * Install and configure JDK 11
 * Install and configure [Apache Maven 3.6.0+](http://maven.apache.org/)
