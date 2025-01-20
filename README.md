@@ -1,4 +1,10 @@
-java -jar selenium-server-4.27.0.jar standalone
+### Requirements: 
+* Docker
+* Selenium
+    - chromedriver 
+    - run: java -jar selenium-server-4.27.0.jar standalone
+* Mysql workbench
+
 
 
 ### Getting started

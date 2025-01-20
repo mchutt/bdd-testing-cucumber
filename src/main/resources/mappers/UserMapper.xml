@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.carina.saucedemo.mappers.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.solvd.carina.saucedemo.models.User">
+        <id property="id" column="user_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="firstName" column="firstName" />
+        <result property="lastName" column="lastName" />
+        <result property="zipCode" column="zipCode" />
+        <collection property="userOrderList" ofType="com.solvd.carina.saucedemo.models.UserOrder">
+            <id property="id" column="order_id" />
+            <result property="productName" column="product_name" />
+        </collection>
+    </resultMap>
+
+    <select id="findById" resultMap="UserResultMap">
+        SELECT
+        u.id AS user_id,
+        u.username,
+        u.password,
+        u.firstName,
+        u.lastName,
+        u.zipCode,
+        o.id AS order_id,
+        o.product_name
+        FROM Users u
+        LEFT JOIN UserOrders o ON u.id = o.user_id
+        WHERE u.id = #{id}
+    </select>
+
+</mapper>
