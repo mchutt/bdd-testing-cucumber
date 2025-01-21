@@ -1,5 +1,6 @@
 package com.solvd.carina.saucedemo.gui.pages;
 
+import com.solvd.carina.saucedemo.gui.components.FilterComponent;
 import com.solvd.carina.saucedemo.gui.components.Header;
 import com.solvd.carina.saucedemo.gui.components.ProductCard;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -15,6 +16,9 @@ public class ProductListPage extends AbstractPage {
 
     @FindBy(id = "header_container")
     private Header header;
+
+    @FindBy(className = "product_sort_container")
+    private ExtendedWebElement sortBtn;
 
     @FindBy(className = "inventory_item")
     private List<ProductCard> productList;
@@ -37,6 +41,11 @@ public class ProductListPage extends AbstractPage {
         if (first.isPresent()) {
             first.get().clickOnAddToCart();
         } else throw new IllegalArgumentException("Product not found: " + name);
+    }
+
+    public FilterComponent openFilterComponent(){
+        sortBtn.click();
+        return new FilterComponent(driver);
     }
 
     public List<ProductCard> getProductList() {

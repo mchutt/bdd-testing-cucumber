@@ -11,6 +11,9 @@ public class ProductCard extends AbstractUIObject {
     @FindBy(className = "inventory_item_name")
     private ExtendedWebElement productName;
 
+    @FindBy(className = "inventory_item_price")
+    private ExtendedWebElement productPrice;
+
     @FindBy(xpath = ".//button[text()='Add to cart']")
     private ExtendedWebElement addToCartBtn;
 
@@ -18,11 +21,16 @@ public class ProductCard extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public String getProductName(){
+    public String getProductName() {
         return productName.getText();
     }
 
-    public void clickOnAddToCart(){
+    public Double getPrice() {
+        return Double.parseDouble(productPrice.getText().substring(1));
+    }
+
+    public void clickOnAddToCart() {
         addToCartBtn.click();
     }
+
 }

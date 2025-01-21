@@ -14,15 +14,22 @@ public class CartItem extends AbstractUIObject {
     @FindBy(xpath = ".//button[text()='Remove']")
     private ExtendedWebElement removeBtn;
 
+    @FindBy(className = "inventory_item_price")
+    private ExtendedWebElement itemPrice;
+
     public CartItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public String getItemName(){
+    public String getItemName() {
         return itemName.getText();
     }
 
-    public void removeFromCart(){
+    public void removeFromCart() {
         removeBtn.click();
+    }
+
+    public Double getPrice() {
+        return Double.parseDouble(itemPrice.getText().substring(1));
     }
 }
