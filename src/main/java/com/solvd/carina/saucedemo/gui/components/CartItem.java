@@ -8,11 +8,18 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartItem extends AbstractUIObject {
 
+    @FindBy(className = "inventory_item_name")
+    private ExtendedWebElement itemName;
+
     @FindBy(xpath = ".//button[text()='Remove']")
     private ExtendedWebElement removeBtn;
 
     public CartItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
+    }
+
+    public String getItemName(){
+        return itemName.getText();
     }
 
     public void removeFromCart(){

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductListPage extends AbstractPage {
 
@@ -25,6 +26,17 @@ public class ProductListPage extends AbstractPage {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(title);
+    }
+
+    public void addProductToCart(String name) {
+        Optional<ProductCard> first = productList.stream()
+                .filter(productCard ->
+                        name.equalsIgnoreCase(productCard.getProductName())
+                )
+                .findFirst();
+        if (first.isPresent()) {
+            first.get().clickOnAddToCart();
+        } else throw new IllegalArgumentException("Product not found: " + name);
     }
 
     public List<ProductCard> getProductList() {

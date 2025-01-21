@@ -1,15 +1,21 @@
 Feature: Sauce Demo testing
   As a user, I want to buy something from Sauce Demo webpage
 
-  Scenario Outline: Checkout functionality
-    Given I am on login page <userId>
-    When I fill in my username and password as credentials
-    And I add the products to the cart
-    And I open cart page and click on checkout button
-    And I fill in my first name last name and zipCode and click on continue button
-    And I click on finish button
-    Then A success message should be visible
+  Background:
+    Given I am on login page
+
+  Scenario: User places an order
+    When I log in with credentials from database
+    Then Product list page is opened
+    When I make order and proceed to checkout
+    Then I have successful order notification
+
+  Scenario Outline: User adds products to cart and verify their presence
+    When I log in as <userId> user
+    Then Product list page is opened
+    When I add several products to cart
+    Then I have products in my cart in my cart
     Examples:
       | userId |
-      | 1  |
-      | 2  |
+      | 2      |
+      | 1      |
